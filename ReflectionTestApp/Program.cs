@@ -102,6 +102,7 @@ namespace ReflectionTestApp
     {
         public static void RegisterType<TType>(params string[] properties)
         {
+            RegisteredTypes.Add(typeof(TType).Name, typeof(TType));
             foreach (var pi in typeof(TType).GetProperties())
             {
                 if (properties.Contains(pi.Name))
@@ -140,11 +141,7 @@ namespace ReflectionTestApp
             [Commands.Delete] = DeleteCommandHandler.Create,
         };
 
-        public static Dictionary<string, Type> RegisteredTypes = new Dictionary<string, Type>
-        {
-            [nameof(Student)] = typeof(Student),
-            [nameof(Room)] = typeof(Room),
-        };
+        public static Dictionary<string, Type> RegisteredTypes = new Dictionary<string, Type>();
 
         internal static string HandleCommand(string command)
         {
